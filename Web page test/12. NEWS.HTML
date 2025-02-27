@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detroix READ MORE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #1a1f2e;
+            color: white;
+            min-height: 100vh;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Top Bar */
+        .top-bar {
+            background-color: #004cff;
+            border-bottom: 1px solid #00ff0d;
+            padding: 4px 4px;
+            text-align: right;
+            font-size: 12px;
+        }
+        .top-bar a {
+            color: #40ff00;
+            margin: 0 8px;
+        }
+        .top-bar a:hover {
+            color: white;
+        }
+        /* Navigation */
+        nav {
+            background-color: #1a1f2e;
+            padding: 16px;
+            position: relative;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .nav-menu {
+            display: none;
+        }
+        .nav-links {
+            display: none;
+        }
+        .nav-links a {
+            padding: 8px 24px;
+            border-radius: 4px;
+        }
+        .nav-links a:hover {
+            background-color: #3cff00;
+        }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #1a1f2e;
+            border-top: 1px solid #374151;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 12px 16px;
+        }
+        .mobile-menu a:hover {
+            background-color: #1e3a8a;
+        }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(to right, #1e3a8a, #1a1f2e);
+        }
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 16px;
+        }
+        .hero-text {
+            max-width: 200%;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 32px;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #f97316;
+            padding: 8px 32px;
+            border-radius: 2px;
+        }
+
+        .cta-button:hover {
+            background-color: #ea580c;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #15ff00;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: rgb(255, 3, 209);
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 16px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature h2 {
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .feature-image {
+            height: 192px;
+            background-color: #1e3a8a;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature p {
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+
+        .more-button {
+            background-color: #1a1f2e;
+            border: 1px solid #374151;
+            color: white;
+            padding: 8px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .more-button:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: #1a1f2e;
+            padding: 48px 16px;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .services h2 {
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .services-list {
+            list-style: none;
+            color: #37fd00;
+            margin-bottom: 24px;
+        }
+
+        .services-list li {
+            margin-bottom: 16px;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .date-box {
+            background-color: #f97316;
+            padding: 12px;
+            text-align: center;
+            border-radius: 4px;
+            min-width: 60px;
+        }
+
+        .date-box .day {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .date-box .month {
+            font-size: 14px;
+        }
+
+        .news-content {
+            color: #77f508;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1f2e;
+            border-top: 1px solid #374151;
+            padding: 16px;
+            margin-top: 48px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 28px;
+        }
+
+        /* Media Queries */
+        @media (min-width: 768px) {
+            .top-bar {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 12px;
+            }
+
+            .hero {
+                height: 500px;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .top-bar {
+                display: none;
+            }
+
+            .nav-menu {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                font-size: 35px;
+            }
+
+            .mobile-menu.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <a href="#">Chicken SUPPORT</a> |
+        <a href="#">FAQS about Chickens</a> |
+        <a href="#">SITEMAP for Cluckers</a> |
+        <a href="#">HELP for Chickenheads</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./ALL PHOTOS/MAIN PAGE PHOTOS/main logo trimmed.pngsmall.png" alt="">
+            </div>
+            <button class="nav-menu" onclick="toggleMenu()">☰</button>
+            <div class="nav-links">
+                <a href="./1. MAIN PAGE.HTML">HOME</a>
+                <a href="./2. READ MORE.HTML">READ MORE</a>
+                <a href="./3. ABOUT.HTML">ABOUT</a>
+                <a href="./4. SERVICES.HTML">SERVICES</a>
+                <a href="./5. Frequently Asked Questions (FAQs).HTML">FAQS</a>
+                <a href="./6. Contacts.HTML">CONTACT</a>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="./1. MAIN PAGE.HTML">HOME</a>
+            <a href="./3. ABOUT.HTML">ABOUT</a>
+            <a href="./4. SERVICES.HTML">SERVICES</a>
+            <a href="./5. Frequently Asked Questions (FAQs).HTML">FAQS</a>
+            <a href="./6. Contacts.HTML">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Stay up to date with the latest in backyard bettys’, city regulations, and the incredible stories  Here’s what’s making headlines:</h2>
+                <p>From City Chickens to Farm raised</p>
+                <a href="2. READ MORE.HTML" class="cta-button">READ MORE</a>
+                <BR>
+                    <BR>
+                    <P>News
+                        📢 “Cracking the Code Forget farmers' markets—now it's all about backyard boogies with these clucking cuties. Who knew that a couple of chickens could provide the freshest eggs, all while giving a nod to food independence? It’s time to embrace the chaos and let the Egg Boom in the ‘Hood begin!
+                        <br>
+                        📢 “Cluck Yeah! Detroit’s Urban Farmers Are Ruffling Feathers—and Lowering Grocery Bills” 
+                        From alleyway coops to rooftop roosts, Ghetto Chickens are transforming how communities think about food security and self-sufficiency.
+                        <br>
+                        📢 “From Scraps to Gold: Ghetto Chickens Are Turning Food Waste into Fresh Eggs”
+                        Local families are feeding their hens leftovers, cutting down on waste, and getting a steady supply of farm-fresh eggs in return. Who knew sustainability could taste this good?
+                        These funky chickens will eat just about anything. Not a morsal wasted!!
+                        </P>
+                    </BR>
+                </BR>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <button class="dot"></button>
+            <button class="dot active"></button>
+            <button class="dot"></button>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+        <div class="features-grid">
+            <!-- SMART -->
+            <div class="feature">
+                <h2>SMART</h2>
+                <h2>CHICKENS</h2>
+                <div class="feature-image">
+                    <img src="./ALL PHOTOS/CHICKEN PHOTOS/SMART CHICKEN CLIPPED.png" alt="Smart">
+                </div>
+                <H2>CLICK THE MORE BUTTON</H2>
+                <H3>FOR SMART CHICKENS</H3>
+                <a href="https://youtu.be/pl2BCp5z8dA" class="cta-button">MORE</a>
+            </div>
+
+            <!-- STRONG -->
+            <div class="feature">
+                <h2>STRONG</h2>
+                <h2>CHICKENS</h2>
+                <div class="feature-image">
+                    <img src="./ALL PHOTOS/CHICKEN PHOTOS/BODY BUILDING CHICKEN.png" alt="Strong">
+                </div>
+                <H2>CLICK THE MORE BUTTON</H2>
+                <H3>FOR STRONG CHICKENS</H3>
+                <a href="https://youtu.be/p15vKJv4Odc" class="cta-button">MORE</a>
+            </div>
+
+            <!-- STABLE -->
+            <div class="feature">
+                <h2>UNSTABLE</h2>
+                <h2>CHICKENS</h2>
+                <div class="feature-image">
+                    <img src="./ALL PHOTOS/CHICKEN PHOTOS/chick 1.png" alt="Stable">
+                </div>
+                <H2>CLICK THE MORE BUTTON</H2>
+                <H3>FOR UNSTABLE CHICKENS</H3>
+                <a href="https://youtu.be/r3jjtdRwl_c" class="cta-button">MORE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="services">
+        <div class="services-grid">
+            <!-- Services -->
+            <div>
+                <h2>SERVICES and Chicken Head Lessons</h2>
+                <ul class="services-list">
+                    <li>Pole Dancing Lesson ($200) </li>
+                    <li>Trick Performance Lesson ($200) </li>
+                    <li>Etiquette Classes Lesson ($200)</li>
+                    <li>Bringing Home the Paper Lesson ($200)</li>
+                    <li>Street Twerking Lesson ($200)</li>
+                </ul>
+                <a href="https://youtu.be/r3jjtdRwl_c" class="cta-button">MORE</a>
+            </div>
+
+            <!-- Opportunities -->
+            <div>
+                <h2>EMPLOYMENT OPPORTUNITIES</h2>
+                <div class="services-list">
+                    <div>
+                        <h3>Pimp Hand Trainer ($400)</h3>
+                        <p>Lip Smackin and Jive Talkin (additional $600 Masterclass) </p>
+                    </div>
+                    <br>
+                    <div>
+                        <h3>DOIN NOT A DAMN THANG ($600)</h3>
+                        <p>While ya Chickens Keep Busy you learn the fine art of not doing a M%^-f$%^ thang</p>
+                        <p> "Stay Greasy Fool"</p>
+                    </div>
+                </div>
+                <a href="https://youtu.be/r3jjtdRwl_c" class="cta-button">MORE</a>
+            </div>
+
+            <!-- News -->
+            <div>
+                <h2>NEWS</h2>
+                <div class="news-item">
+                    <div class="date-box">
+                        <div class="day">21</div>
+                        <div class="month">FEB</div>
+                        <div class="YEAR">2025</div>
+                    </div>
+                    <div class="news-content">📢 “Cracking the Code to Food Independence” Egg Boom in the ‘Hood! How Ghetto Chickens Are Twerkin it at the "Hen House" </div>
+                </div>
+                <div class="news-item">
+                    <div class="date-box">
+                        <div class="day">9</div>
+                        <div class="month">FEB.</div>
+                        <div class="YEAR">2025</div>
+                    </div>
+                    <div class="news-content">📢 “Cluck Yeah! New Orleans "URBAN FARMERS" Are Ruffling Feathers—and Lowering Grocery Bills” </div>
+                </div>
+                <div class="news-item">
+                    <div class="date-box">
+                        <div class="day">2</div>
+                        <div class="month">FEB</div>
+                        <div class="YEAR">2025</div>
+                    </div>
+                    <div class="news-content">📢 “From Scraps to Gold: How Ghetto Chickens Are Turning Food Waste into Fresh Eggs”</div>
+                </div>
+                <a href="https://youtu.be/k8mwcABWrPY" class="cta-button">MORE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            New Orleans © 2025 • AINT NO PRIVACY   
+            <br>   ...........THATS OUR POLICY
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
